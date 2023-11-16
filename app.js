@@ -2,10 +2,23 @@ const express = require('express');
 
 const app = express();
 
+//Template Engine
+app.set('view engine', 'ejs');
+
+//Middlewares
+app.use(express.static('public'));
 const port = 3000;
 
+//Routes
+app.get('/about', (req, res) => {
+  res.status(200).render('about', {
+    page_name: 'about',
+  });
+});
 app.get('/', (req, res) => {
-  res.status(200).send('Index Sayfasi');
+  res.status(200).render('index', {
+    page_name: 'index',
+  });
 });
 app.listen(port, () => {
   console.log(`App started on port ${port}`);
